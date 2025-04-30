@@ -36,8 +36,7 @@ def init_db():
 
     existing_docs = (len(patient_requests))
     if existing_docs > 100:
-        print(f'PatientRequest table already initialized with {
-              existing_docs} requests')
+        print(f'PatientRequest table already initialized with {existing_docs} requests')
         return
 
     # Add some closed requests to the patient_requests table

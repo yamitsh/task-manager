@@ -13,7 +13,8 @@ class ClinicManager:
 
     def process_tasks_update(self, task_input: TaskInput):
         """Accepts a task_input object that contains all the tasks that were modified since
-        the last time this method was called. The method process the changes to the tasks, and updates the patient requests appropriately. """
+        the last time this method was called. The method process the changes to the tasks, and updates the patient
+        requests appropriately. """
 
         tasks = task_input.tasks
         if not tasks:
@@ -24,6 +25,8 @@ class ClinicManager:
         newly_closed_tasks = [t for t in tasks if t.status == 'Closed']
 
         # Question: What is a potential performance issue with this code ?
+        # Answer: low latency since we need to search in each document the string value of the status.
+        # this can be improved by creating indexes
         open_tasks = list(self.task_service.get_open_tasks())
 
         self.patient_request_service.update_requests(

@@ -15,14 +15,14 @@ class PatientRequestService(ABC):
         """ Accepts a list of modified and open tasks and updates the relevant PatientRequest objects. """
         raise NotImplementedError
 
-    def to_patient_request(self, patient_id, patient_tasks):
+    def to_patient_request(self, patient_id, patient_tasks, is_split_by_department=False):
 
         open_tasks: list[PatientTask] = [
             t for t in patient_tasks if t.status == 'Open']
 
         req_status = 'Open' if len(open_tasks) > 0 else 'Closed'
 
-        # We only care about the closed tasks if all the tasks are closed and we are closing the request.
+        # We only care about the closed tasks. If all the tasks are closed, we are closing the request.
         req_tasks = open_tasks or patient_tasks
 
         tasks_by_updated_asc: list[PatientTask] = sorted(
@@ -43,7 +43,8 @@ class PatientRequestService(ABC):
             messages=[
                 t.message for t in tasks_by_updated_asc],
             medications={
-                m for t in req_tasks for m in t.medications}
+                m for t in req_tasks for m in t.medications},
+            is_split_by_department=is_split_by_department,
         )
 
         return new_pat_req

@@ -7,7 +7,9 @@ import db.db_tinydb as db
 cur_dir = Path(__file__).parent
 
 files = ['./data/input_task_1.json',
-         './data/input_task_2.json', './data/input_task_3.json', './data/input_task_4.json']
+         './data/input_task_2.json',
+         './data/input_task_3.json',
+         './data/input_task_4.json']
 
 
 def load_input(file: PathLike):

@@ -18,3 +18,6 @@ class PatientRequest(BaseModel):
     task_ids: set[str]
 
     # NOTE: Model can be extended as desired
+
+    # this new field is set to True to identify the documents after the new enhancement implementation
+    is_split_by_department: bool

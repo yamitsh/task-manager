@@ -8,7 +8,6 @@ class Medication(BaseModel, frozen=True):
     name: str
 
 
-
 class PatientTask(BaseModel):
     id: str
     patient_id: str
